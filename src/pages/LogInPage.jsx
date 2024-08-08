@@ -6,7 +6,7 @@ import LogIn from "../components/logIn/LogIn";
 
 function LogInPage() {
   return (
-    <div className="py-8 w-full flex justify-center items-center">
+    <div className="py-8 w-full flex justify-center items-center text-white">
       <LogIn />
     </div>
   );

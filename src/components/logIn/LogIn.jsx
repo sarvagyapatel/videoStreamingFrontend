@@ -24,7 +24,7 @@ function LogIn() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center p-5 rounded-lg shadow-lg border-2 border-white gap-2">
+    <div className="w-full flex flex-col items-center justify-center p-5 rounded-lg shadow-lg  text-white gap-2">
       <div className="mb-2 flex justify-center">
         <span className="inline-block w-full max-w-[100px]">
           <Logo className="w-13 h-10 rounded-lg" />
@@ -33,7 +33,7 @@ function LogIn() {
       <h2 className="text-center text-gray-600 text-2xl font-bold leading-tight">
         Sign in to your account
       </h2>
-      <p className="mt-2 text-center text-base text-black/60">
+      <p className="mt-2 text-center text-base text-neutral-400">
         Don&apos;t have any account?&nbsp;
         <Link
           to="/signup"

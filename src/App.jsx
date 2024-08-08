@@ -16,7 +16,7 @@ function App() {
   }, [])
 
   return (
-    <div className='min-h-screen flex flex-wrap content-between'>
+    <div className='min-h-screen flex flex-wrap content-between bg-neutral-900'>
       <div className='w-full block'>
         <Header username={userDetails.username} avatar={userDetails.avatar}/>
         <main>
