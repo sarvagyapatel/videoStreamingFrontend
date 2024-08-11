@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import LogIn from './components/logIn/LogIn'
 import User from './pages/User'
 import VideoPage from './pages/VideoPage'
+import SignUp from './components/signUp/SignUp'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LogIn />
+      },
+      {
+        path: "/signup",
+        element: <SignUp />
       },
       {
         path: "/user",

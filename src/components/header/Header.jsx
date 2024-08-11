@@ -1,68 +1,78 @@
 /* eslint-disable react/prop-types */
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import Logo from "../logo/Logo";
-import singnInavatar from "./singnInavatar.png";
+import signInAvatar from "./singnInavatar.png";
 import { logOut } from "../../service/auth";
-// eslint-disable-next-line no-unused-vars
-function Header({ username, avatar }) {
+import { useState } from "react";
+
+function Header({ username, avatar, onSearch }) {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = () => {
+    if (onSearch) {
+      onSearch(searchQuery);
+    } else {
+      // Default behavior could be navigating to a search results page
+      navigate(`/search?query=${searchQuery}`);
+    }
+  };
+
+  const handleLogout = async () => {
+    await logOut();
+    navigate("/login");
+  };
+
   return (
-    <div>
-      <div className="flex flex-row justify-between mt-3">
-        <div className="pl-2 -mt-2">
-          <Logo className="h-14 w-14 " />
-        </div>
-        <div className="flex flex-row justify-between ">
-          <div>
-            <Input
-              placeholder="Search"
-              className=" w-96 h-10 px-4 shadow-lg rounded-l-full text-lg p-1 border-2 border-neutral-700 font-semibold"
-            />
-          </div>
-          <div>
-            <Button
-              className=" w-12 h-10 font-semibold p-1 px-3 rounded-r-full text-white bg-neutral-700 text-lg"
-              buttonText="Go"
-            />
-          </div>
-        </div>
-        <div className="w-fit flex flex-row justify-between gap-3">
-          {username ? (
-            <div className="w-full flex flex-row  justify-center items-center  rounded-full mr-2">
-              <Link to="/user">
-                <img
-                  className="w-10 h-8 rounded-full ml-2"
-                  src={avatar}
-                  alt="avatar"
-                />
-              </Link>
-              <Button
-                className="w-fit h-10 p-1 px-3 text-blue-800 font-semibold"
-                buttonText="SignOut"
-                onClick={logOut}
+    <div className="flex flex-row justify-between items-center mt-3 p-2 h-10">
+      <div className="pl-2">
+        <Logo className="w-14" />
+      </div>
+      <div className="flex flex-row items-center">
+        <Input
+          placeholder="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="xl:w-96 sm:w-80 min-[320px]:w-36 h-10 px-4 shadow-lg rounded-l-full text-lg border-2 bg-neutral-900 border-neutral-800 font-semibold"
+        />
+        <Button
+          className="w-12 h-10 font-semibold p-1 px-3 rounded-r-full text-white bg-neutral-800 text-lg"
+          buttonText="Go"
+          onClick={handleSearch}
+        />
+      </div>
+      <div className="flex flex-row items-center gap-3">
+        {username ? (
+          <div className="flex flex-row items-center">
+            <Link to="/user" className="flex items-center">
+              <img
+                className="w-14 h-fit rounded-full"
+                src={avatar}
+                alt={`${username}'s avatar`}
               />
-            </div>
-          ) : (
-            <div>
-              <Link
-                className="w-full flex flex-row  justify-center items-center  rounded-full mr-2"
-                to="/login"
-              >
-                <img
-                  className="w-10 h-8 rounded-full ml-2"
-                  src={singnInavatar}
-                  alt="avatar"
-                />
-                <Button
-                  className="w-fit h-10 p-1 px-3 text-blue-800 font-semibold"
-                  buttonText="SignIn"
-                />
-              </Link>
-            </div>
-          )}
-        </div>
+            </Link>
+            <Button
+              className="text-blue-800 font-semibold"
+              buttonText="Sign Out"
+              onClick={handleLogout}
+            />
+          </div>
+        ) : (
+          <Link to="/login" className="flex items-center">
+            <img
+              className="w-10 h-10 rounded-full"
+              src={signInAvatar}
+              alt="Sign In"
+            />
+            <Button
+              className="text-blue-800 font-semibold"
+              buttonText="Sign In"
+            />
+          </Link>
+        )}
       </div>
     </div>
   );

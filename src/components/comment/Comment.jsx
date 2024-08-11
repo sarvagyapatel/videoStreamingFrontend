@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getVideoComments } from "../../service/comment";
-import CommentContainer from "./CommentContainer";
+import TitleCommentContainer from "../container/TitleCommentContainer";
 
 // eslint-disable-next-line react/prop-types
 function Comment({ videoId }) {
@@ -19,9 +19,9 @@ function Comment({ videoId }) {
   }, [videoId]);
 
   return (
-      <div className="w-full h-full flex flex-col items-start justify-start p-2 gap-2">
+      <div className="w-full h-full flex flex-col items-start justify-start p-2 gap-2 mb-32">
         {comments.map((comment) => (
-          <CommentContainer key={comment._id} userId={comment.owner} content={comment.content}/>
+          <TitleCommentContainer key={comment._id} userId={comment.owner} content={comment.content}/>
         ))}
       </div>
   );

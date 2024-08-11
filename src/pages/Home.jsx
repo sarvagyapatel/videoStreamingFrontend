@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllVideos } from "../service/videos";
 import { Link } from "react-router-dom";
+import VideoDetails from "../components/videodetails/VideoDetails";
 
 function Home() {
   const [videos, setVideos] = useState([]);
@@ -22,15 +23,13 @@ function Home() {
     <div className="w-full h-full">
       <div className="w-full h-full flex flex-wrap items-center justify-center gap-4">
         {videos.map((video) => (
-          <div key={video._id} className="w-48 h-fit">
-            <h1>{video.title}</h1>
+          <div key={video._id} className="w-fit h-fit">
             <Link
               to="/video"
               state={{ video }}
             >
-              <img src={video.thumbnail} alt="thumbnail" />
+              <VideoDetails video={video}/>
             </Link>
-            <p>{video.description}</p>
           </div>
         ))}
       </div>

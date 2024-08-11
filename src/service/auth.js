@@ -2,7 +2,15 @@ import axios from "axios";
 
 export const register = async (data) => {
   try {
-    const response = await axios.post("/api/v1/users/register", data, {
+    const formData = new FormData();
+    formData.append("FullName", data.FullName);
+    formData.append("username", data.username);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("avatar",data.avatar[0]);
+    formData.append("coverImage",data.coverImage[0] || "")
+
+    const response = await axios.post("/api/v1/users/register", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
