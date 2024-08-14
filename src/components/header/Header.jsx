@@ -7,6 +7,7 @@ import Logo from "../logo/Logo";
 import signInAvatar from "./singnInavatar.png";
 import { logOut } from "../../service/auth";
 import { useState } from "react";
+import { MdOutlineVideoCall } from "react-icons/md";
 
 function Header({ username, avatar, onSearch }) {
   const navigate = useNavigate();
@@ -27,9 +28,9 @@ function Header({ username, avatar, onSearch }) {
   };
 
   return (
-    <div className="flex flex-row justify-between items-center mt-3 p-2 h-10">
+    <div className="flex flex-row justify-between items-center mt-3 p-2 h-10 mb-3">
       <div className="pl-2">
-        <Logo className="w-14" />
+        <Link to="/"><Logo className="w-14" /></Link>
       </div>
       <div className="flex flex-row items-center">
         <Input
@@ -47,6 +48,11 @@ function Header({ username, avatar, onSearch }) {
       <div className="flex flex-row items-center gap-3">
         {username ? (
           <div className="flex flex-row items-center">
+            <div className="w-fit h-fit mr-2 cursor-pointer">
+              <Link to="/uploadVideo">
+                <MdOutlineVideoCall className="text-4xl text-white" />
+              </Link>
+            </div>
             <Link to="/user" className="flex items-center">
               <img
                 className="w-14 h-fit rounded-full"

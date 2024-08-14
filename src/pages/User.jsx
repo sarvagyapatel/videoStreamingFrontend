@@ -1,16 +1,9 @@
 import { useEffect, useState } from "react";
 import { currentUser as user } from "../service/auth";
 import Logo from "../components/logo/Logo";
-import { publishVideo } from "../service/videos";
-import { useForm } from "react-hook-form";
-import Input from "../components/input/Input";
-import Button from "../components/button/Button";
 
 function User() {
   const [userData, setUserData] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [newVideo, setNewVideo] = useState({});
-  const { register, handleSubmit } = useForm();
 
   useEffect(() => {
     try {
@@ -21,19 +14,6 @@ function User() {
       console.log(error);
     }
   }, []);
-
-  const uploadVideo = async (data) => {
-    try {
-      setIsLoading(true);
-      const response = await publishVideo(data);
-      setNewVideo(response.data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-    console.log(data)
-  };
 
   return (
     <div className="w-full h-full flex flex-wrap items-center justify-center">
@@ -52,17 +32,6 @@ function User() {
             />
           </div>
         </div>
-      </div>
-      <div className="w-full h-full">
-        <form onSubmit={handleSubmit(uploadVideo)} >
-          <div className="w-full h-full flex flex-col items-center justify-center">
-            <Input placeholder="Title" type="input" className="w-fit border-black border-2 p-1 rounded-lg" {...register("title", { required: true })}/>
-            <Input placeholder="Description" type="input" className="w-fit border-black border-2 p-1 rounded-lg" {...register("description", { required: true })}/>
-            <Input label="Video File:" type="file" name="video" {...register("videoFile", { required: true })} className=""/>
-            <Input label="Thumbnail:" type="file" {...register("thumbnail", { required: true })} className=""/>
-            <Button type="Submit" className="w-24 text-center border-2 text-white shadow-lg font-semibold p-1 border-blue-700 bg-blue-700 hover:bg-blue-800 rounded-lg"/>
-          </div>
-        </form>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 // import React from 'react'
 
+import { Link } from "react-router-dom";
 import Logo from "../logo/Logo";
 
 export function Footer() {
@@ -10,7 +11,7 @@ export function Footer() {
           <div className="w-auto p-8">
             <a href="#">
               <div className="inline-flex items-center">
-                 <Logo className="h-14 w-14"/>
+              <Link to="/"><Logo className="w-14" /></Link>
               </div>
             </a>
           </div>

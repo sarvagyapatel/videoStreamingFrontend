@@ -1,45 +1,48 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import App from './App'
-import Home from './pages/Home'
-import LogIn from './components/logIn/LogIn'
-import User from './pages/User'
-import VideoPage from './pages/VideoPage'
-import SignUp from './components/signUp/SignUp'
+
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App";
+import Home from "./pages/Home";
+import LogIn from "./components/logIn/LogIn";
+import User from "./pages/User";
+import VideoPage from "./pages/VideoPage";
+import SignUp from "./components/signUp/SignUp";
+import UploadVideo from "./components/uploadVideo/UploadVideo";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
-    children:[
+    children: [
       {
         path: "/",
         element: <Home />,
       },
       {
         path: "/login",
-        element: <LogIn />
+        element: <LogIn />,
       },
       {
         path: "/signup",
-        element: <SignUp />
+        element: <SignUp />,
       },
       {
         path: "/user",
-        element: <User />
+        element: <User />,
       },
       {
         path: "/video",
-        element: <VideoPage />
+        element: <VideoPage />,
+      },
+      {
+        path: "/uploadVideo",
+        element: <UploadVideo />
       }
-    ] 
+    ],
   },
-])
+]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-     <RouterProvider router={router}/>
-  </React.StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <RouterProvider router={router} />
+);

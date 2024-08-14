@@ -21,7 +21,7 @@ function Home() {
 
   return (
     <div className="w-full h-full">
-      <div className="w-full h-full flex flex-wrap items-center justify-center gap-4">
+      <div className="w-full h-full flex flex-wrap items-center justify-center gap-4 mt-10">
         {videos.map((video) => (
           <div key={video._id} className="w-fit h-fit">
             <Link

@@ -37,3 +37,12 @@ export const publishVideo = async (data) => {
     throw new Error(error?.message || "Something went wrong");
   }
 };
+
+export const updateViews = async (videoId) => {
+  try {
+    await axios.get(`/api/v1/video/addViews/${videoId}`)
+    return 1;
+  } catch (error) {
+    throw new Error(error?.message || "Something went wrong");
+  }
+}
