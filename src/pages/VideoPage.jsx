@@ -117,7 +117,7 @@ function VideoPage() {
                 <Button
                   buttonText={subscribed ? "Subscribed" : "Subscribe"}
                   className={`p-2 px-3  ${
-                    subscribed ? "bg-red-700" : "bg-neutral-800"
+                    subscribed ? "bg-neutral-800" : "bg-red-700"
                   } rounded-xl`}
                   onClick={subscribeChannel}
                 />

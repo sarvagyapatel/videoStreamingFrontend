@@ -1,14 +1,26 @@
 import { useEffect, useState } from "react";
 import { currentUser as user } from "../service/auth";
+import { getChannelVideos } from "../service/videos";
+import { Link } from "react-router-dom";
+import VideoDetails from "../components/videodetails/VideoDetails";
+import { User as UserContainer } from "../components/user/User";
 import Logo from "../components/logo/Logo";
 
 function User() {
   const [userData, setUserData] = useState({});
+  const [channelVideos, setChannelVideos] = useState([]);
+
+  const videos = async (userId) => {
+    const response = await getChannelVideos(userId);
+    setChannelVideos(response);
+    console.log(response);
+  };
 
   useEffect(() => {
     try {
       user().then((response) => {
         setUserData(response);
+        videos(response._id);
       });
     } catch (error) {
       console.log(error);
@@ -16,22 +28,21 @@ function User() {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-wrap items-center justify-center">
-      <div className="w-full h-full flex justify-center items-center">
-        <div className="relative w-full h-64 flex  items-center">
-          <div className="absolute w-11/12 h-full left-24 flex justify-center">
-            <Logo
-              image={userData.coverImage}
-              className="w-11/12 h-64 rounded-3xl"
-            />
+    <div className="w-full h-full flex flex-col items-center justify-center text-white p-4 gap-8">
+      <div className="w-full flex items-center justify-center rounded-3xl">
+        <Logo image={userData.coverImage} className="w-full rounded-3xl" />
+      </div>
+      <div className="flex w-full items-start justify-start">
+        <UserContainer userData={userData} noOfVideos={channelVideos.length} />
+      </div>
+      <div className="flex flex-wrap w-full items-start justify-start gap-2">
+        {channelVideos.map((video) => (
+          <div key={video._id} className="w-fit h-fit">
+            <Link to="/video" state={{ video }}>
+              <VideoDetails video={video} />
+            </Link>
           </div>
-          <div className="relative top-1/4 left-48 w-96 h-64 ">
-            <Logo
-              image={userData.avatar}
-              className="rounded-full shadow-2xl w-48 h-48"
-            />
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
