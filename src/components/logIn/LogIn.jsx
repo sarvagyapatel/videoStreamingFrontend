@@ -4,19 +4,20 @@ import { useState } from "react";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import Logo from "../logo/Logo";
-import { login as loginHook } from "../../service/auth";
+import { login } from "../../service/auth";
+import { useDispatch } from "react-redux";
 
 function LogIn() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     setError("");
     try {
-      const response = await loginHook(data);
-      console.log(response);
-      navigate("/");
+      dispatch(login(data));
+      navigate('/')
     } catch (err) {
       setError(err.message);
     }

@@ -1,3 +1,4 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const register = async (data) => {
@@ -23,34 +24,34 @@ export const register = async (data) => {
 };
 
 
-export const login = async (data) => {
+export const login = createAsyncThunk("login", async (data) => {
     try {
         const response = await axios.post("/api/v1/users/login", data, { withCredentials: true });
         return response.data.data;
     } catch (error) {
         throw new Error(error?.message)
     }
-};
+}) 
   
 
-export const currentUser = async () => {
+export const currentUser = createAsyncThunk("currentUser", async () => {
     try {
         const response = await axios.post("/api/v1/users/current_user", {}, { withCredentials: true });
         return response.data.data;
     } catch (error) {
         throw new Error(error?.message)
     }
-};
+}); 
 
 
-export const logOut = async () => {
+export const logOut = createAsyncThunk("logout", async () => {
     try {
         const response = await axios.post("/api/v1/users/logout", {}, { withCredentials: true });
         return response.data.data;
     } catch (error) {
         throw new Error(error?.message)
     }
-};
+}) 
 
 
 export const getUserByID = async (userId) => {

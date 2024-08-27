@@ -1,4 +1,3 @@
-
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -9,6 +8,8 @@ import User from "./pages/User";
 import VideoPage from "./pages/VideoPage";
 import SignUp from "./components/signUp/SignUp";
 import UploadVideo from "./components/uploadVideo/UploadVideo";
+import store from "./redux-toolkit/store/store";
+import { Provider } from "react-redux";
 
 const router = createBrowserRouter([
   {
@@ -37,12 +38,14 @@ const router = createBrowserRouter([
       },
       {
         path: "/uploadVideo",
-        element: <UploadVideo />
-      }
+        element: <UploadVideo />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

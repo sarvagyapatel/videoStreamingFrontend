@@ -9,7 +9,7 @@ function Home() {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await getAllVideos();
+        let response = await getAllVideos();
         setVideos(response.data);
       } catch (error) {
         console.log(error);

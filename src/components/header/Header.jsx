@@ -8,10 +8,12 @@ import signInAvatar from "./singnInavatar.png";
 import { logOut } from "../../service/auth";
 import { useState } from "react";
 import { MdOutlineVideoCall } from "react-icons/md";
+import { useDispatch } from "react-redux";
 
 function Header({ username, avatar, onSearch }) {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
 
   const handleSearch = () => {
     if (onSearch) {
@@ -23,7 +25,7 @@ function Header({ username, avatar, onSearch }) {
   };
 
   const handleLogout = async () => {
-    await logOut();
+    dispatch(logOut())
     navigate("/login");
   };
 

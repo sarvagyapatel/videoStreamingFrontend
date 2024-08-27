@@ -1,31 +1,22 @@
 import { useEffect, useState } from "react";
-import { currentUser as user } from "../service/auth";
 import { getChannelVideos } from "../service/videos";
 import { Link } from "react-router-dom";
 import VideoDetails from "../components/videodetails/VideoDetails";
 import { User as UserContainer } from "../components/user/User";
 import Logo from "../components/logo/Logo";
+import { useSelector } from "react-redux";
 
 function User() {
-  const [userData, setUserData] = useState({});
   const [channelVideos, setChannelVideos] = useState([]);
-
-  const videos = async (userId) => {
-    const response = await getChannelVideos(userId);
-    setChannelVideos(response);
-    console.log(response);
-  };
+  const userData = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
-    try {
-      user().then((response) => {
-        setUserData(response);
-        videos(response._id);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+    const videos = async () => {
+      const response = await getChannelVideos(userData._id);
+      setChannelVideos(response);
+    };
+    videos();
+  }, [userData]);
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center text-white p-4 gap-8">
@@ -47,5 +38,4 @@ function User() {
     </div>
   );
 }
-
 export default User;
