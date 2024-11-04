@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllVideos } from "../service/videos";
 import { Link } from "react-router-dom";
 import VideoDetails from "../components/videodetails/VideoDetails";
+import axios from "axios";
 
 function Home() {
   const [videos, setVideos] = useState([]);
@@ -15,6 +16,16 @@ function Home() {
         console.log(error);
       }
     };
+
+    const check = async ()=>{
+      try {
+        let response = await axios.get("/api/v1/check");
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    check();
 
     fetchVideos();
   }, []);
