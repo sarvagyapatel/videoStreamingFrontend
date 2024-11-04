@@ -19,7 +19,7 @@ function Home() {
 
     const check = async ()=>{
       try {
-        let response = await axios.get("/api/v1/check");
+        let response = await axios.get("https://www.vps.sarvagyapatel.in/api/v1/check");
         console.log(response.data);
       } catch (error) {
         console.log(error);
