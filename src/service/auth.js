@@ -11,7 +11,7 @@ export const register = async (data) => {
     formData.append("avatar",data.avatar[0]);
     formData.append("coverImage",data.coverImage[0] || "")
 
-    const response = await axios.post("/api/v1/users/register", formData, {
+    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/v1/users/register`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -26,7 +26,7 @@ export const register = async (data) => {
 
 export const login = createAsyncThunk("login", async (data) => {
     try {
-        const response = await axios.post("/api/v1/users/login", data, { withCredentials: true });
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/v1/users/login`, data, { withCredentials: true });
         return response.data.data;
     } catch (error) {
         throw new Error(error?.message)
@@ -36,7 +36,7 @@ export const login = createAsyncThunk("login", async (data) => {
 
 export const currentUser = createAsyncThunk("currentUser", async () => {
     try {
-        const response = await axios.post("/api/v1/users/current_user", {}, { withCredentials: true });
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/v1/users/current_user`, {}, { withCredentials: true });
         return response.data.data;
     } catch (error) {
         throw new Error(error?.message)
@@ -46,7 +46,7 @@ export const currentUser = createAsyncThunk("currentUser", async () => {
 
 export const logOut = createAsyncThunk("logout", async () => {
     try {
-        const response = await axios.post("/api/v1/users/logout", {}, { withCredentials: true });
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/v1/users/logout`, {}, { withCredentials: true });
         return response.data.data;
     } catch (error) {
         throw new Error(error?.message)
@@ -56,7 +56,7 @@ export const logOut = createAsyncThunk("logout", async () => {
 
 export const getUserByID = async (userId) => {
     try {
-        const response = await axios.get(`/api/v1/users/getUserById/${userId}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/v1/users/getUserById/${userId}`);
         return response.data.data;
     } catch (error) {
         throw new Error(error?.message)

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const toggleLike = async (videoId) => {
     try {
-        const response = await axios.get(`/api/v1/likes/togglevideoLike/${videoId}`,{},{
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/v1/likes/togglevideoLike/${videoId}`,{},{
             withCredentials: true,
           })
         if(response.data.statusCode===200){
@@ -17,7 +17,7 @@ export const toggleLike = async (videoId) => {
 
 export const totalLikes = async (videoId) => {
     try {
-        const response = await axios.get(`/api/v1/likes/totalLikes/${videoId}`)
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/v1/likes/totalLikes/${videoId}`)
         return response.data.data[0];
     } catch (error) {
         throw new Error(error.message || "Something went wrong")
@@ -26,7 +26,7 @@ export const totalLikes = async (videoId) => {
 
 export const getlikeStatus = async (videoId) => {
     try {
-        const response = await axios.get(`/api/v1/likes/likeStatus/${videoId}`,{},{
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/v1/likes/likeStatus/${videoId}`,{},{
             withCredentials: true,
           })
         return response.data.data;
